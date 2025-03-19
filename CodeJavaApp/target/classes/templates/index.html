@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Shopping Assistant</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/images/leaf-icon.png" type="image/png"> 
+</head>
+<body>
+
+    <header>
+        <h1>Eco-Friendly Shopping Assistant 🌍</h1>
+        <p>Shop Smart, Live Green</p>
+		<div>
+			<h3><a th:href="@{/register}">Register</a></h3>
+		</div>
+    </header>
+
+    <section class="hero">
+        <div class="overlay">
+            <div class="hero-content">
+                <h2>Embrace Sustainability, One Product at a Time</h2>
+                <p>Discover eco-friendly alternatives and make a difference.</p>
+                <a href="/products" class="button">Explore Sustainable Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <img src="" alt="Eco-friendly">
+            <h3>Eco-Friendly Products</h3>
+            <p>Find biodegradable, plastic-free, and ethically sourced alternatives.</p>
+        </div>
+        <div class="feature">
+            <img src="/images/background.jpg" alt="Sustainable">
+            <h3>Sustainable Brands</h3>
+            <p>Support companies using renewable energy and eco-conscious packaging.</p>
+        </div>
+        <div class="feature">
+            <img src="src/main/resources/static/images/leaf-icon.png" alt="Green Living">
+            <h3>Green Living Tips</h3>
+            <p>Learn how small lifestyle changes can reduce your carbon footprint.</p>
+        </div>
+		
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Eco-Friendly Shopping Assistant | Making the world greener, one step at a time</p>
+    </footer>
+
+</body>
+</htm>
