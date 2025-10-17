@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Shopping Assistant</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌍 Eco-Friendly Shopping Assistant</h1>
+            <p>Shop Smart, Live Green</p>
+            <nav>
+                <a th:href="@{/register}" class="btn-nav">Register</a>
+                <a th:href="@{/login}" class="btn-nav">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Embrace Sustainability, One Product at a Time</h2>
+            <p>Discover eco-friendly alternatives to everyday products and track your environmental impact.</p>
+            <a th:href="@{/search}" class="btn-primary">Explore Sustainable Products</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Eco-Friendly?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <span class="icon">🌱</span>
+                    <h3>Eco-Friendly Products</h3>
+                    <p>Find biodegradable, plastic-free, and ethically sourced alternatives.</p>
+                </div>
+                <div class="feature">
+                    <span class="icon">🔗</span>
+                    <h3>Direct Purchase Links</h3>
+                    <p>Buy eco-friendly alternatives directly from trusted online retailers.</p>
+                </div>
+                <div class="feature">
+                    <span class="icon">📊</span>
+                    <h3>Track Your Impact</h3>
+                    <p>See how much CO2 and plastic you've saved by choosing sustainable options.</p>
+                </div>
+                <div class="feature">
+                    <span class="icon">🤖</span>
+                    <h3>AI-Powered Insights</h3>
+                    <p>Get personalized pros, cons, and suggestions powered by ChatGPT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" th:if="${products != null and !products.isEmpty()}">
+        <div class="container">
+            <h2>Featured Eco-Friendly Alternatives</h2>
+            <div class="product-grid">
+                <div class="product-card" th:each="product : ${products}">
+                    <img th:src="${product.imageUrl != null ? product.imageUrl : '/images/eco-placeholder.jpg'}" 
+                         th:alt="${product.ecoAlternative}">
+                    <h3 th:text="${product.ecoAlternative}">Product Name</h3>
+                    <p class="normal-product">Instead of: <span th:text="${product.normalProduct}"></span></p>
+                    <a th:href="@{'/product/' + ${product.id}}" class="btn-secondary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Eco-Friendly Shopping Assistant | Making the world greener, one step at a time</p>
+    </footer>
+</body>
+</html>

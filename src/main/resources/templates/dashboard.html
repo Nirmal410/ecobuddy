@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Eco Shop</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌍 Eco Dashboard</h1>
+            <nav>
+                <a th:href="@{/search}" class="btn-nav">Search Products</a>
+                <a th:href="@{/admin}" class="btn-nav">Admin</a>
+                <a th:href="@{/logout}" class="btn-nav">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h2>Welcome, <span th:text="${user.firstName}">User</span>!</h2>
+            <p>Your Environmental Impact</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">🌿</span>
+                    <h3 th:text="${stats.totalCo2Saved} + ' kg'">0 kg</h3>
+                    <p>CO2 Saved</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">♻️</span>
+                    <h3 th:text="${stats.totalPlasticSaved} + ' kg'">0 kg</h3>
+                    <p>Plastic Saved</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🛒</span>
+                    <h3 th:text="${stats.totalPurchases}">0</h3>
+                    <p>Eco Purchases</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Your Impact Over Time</h3>
+                <canvas id="impactChart"></canvas>
+            </div>
+
+            <div class="recent-purchases">
+                <h3>Recent Eco-Friendly Purchases</h3>
+                <div class="purchase-list" th:if="${stats.recentPurchases != null and !stats.recentPurchases.isEmpty()}">
+                    <div class="purchase-item" th:each="purchase : ${stats.recentPurchases}">
+                        <div class="purchase-info">
+                            <h4 th:text="${purchase.product.ecoAlternative}">Product</h4>
+                            <p th:text="'Instead of: ' + ${purchase.product.normalProduct}"></p>
+                            <p class="date" th:text="${#temporals.format(purchase.purchaseDate, 'MMM dd, yyyy HH:mm')}"></p>
+                        </div>
+                        <div class="purchase-impact">
+                            <span class="impact-badge">🌿 CO2: <span th:text="${purchase.co2Saved} + ' kg'"></span></span>
+                            <span class="impact-badge">♻️ Plastic: <span th:text="${purchase.plasticSaved} + ' kg'"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <p th:if="${stats.recentPurchases == null or stats.recentPurchases.isEmpty()}">
+                    No purchases yet. Start exploring eco-friendly products!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        const impactChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['CO2 Saved (kg)', 'Plastic Saved (kg)'],
+                datasets: [{
+                    label: 'Environmental Impact',
+                    data: [
+                        [[${stats.totalCo2Saved}]],
+                        [[${stats.totalPlasticSaved}]]
+                    ],
+                    backgroundColor: [
+                        'rgba(76, 175, 80, 0.6)',
+                        'rgba(33, 150, 243, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(33, 150, 243, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

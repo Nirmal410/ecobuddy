@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${product.ecoAlternative} + ' - Eco Shop'">Product Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌍 Product Details</h1>
+            <nav>
+                <a th:href="@{/search}">Back to Search</a>
+                <a th:href="@{/dashboard}">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="container">
+            <div class="detail-grid">
+                <div class="product-image">
+                    <img th:src="${product.imageUrl != null ? product.imageUrl : '/images/eco-placeholder.jpg'}" 
+                         th:alt="${product.ecoAlternative}">
+                </div>
+                
+                <div class="product-main-info">
+                    <h1 th:text="${product.ecoAlternative}">Eco Product</h1>
+                    <p class="subtitle">Eco-friendly alternative to: <strong th:text="${product.normalProduct}"></strong></p>
+                    
+                    <div class="price-section" th:if="${product.ecoPrice != null}">
+                        <span class="price">$<span th:text="${product.ecoPrice}"></span></span>
+                        <span class="normal-price" th:if="${product.normalPrice != null}">
+                            Normal price: $<span th:text="${product.normalPrice}"></span>
+                        </span>
+                    </div>
+                    
+                    <p class="description" th:text="${product.description}">Product description</p>
+                    
+                    <div class="impact-section">
+                        <h3>Environmental Impact Per Unit</h3>
+                        <div class="impact-badges">
+                            <span class="impact-badge large">🌿 CO2 Saved: <strong th:text="${product.co2SavedPerUnit} + ' kg'"></strong></span>
+                            <span class="impact-badge large">♻️ Plastic Saved: <strong th:text="${product.plasticSavedPerUnit} + ' kg'"></strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a th:if="${product.purchaseLink != null}" 
+                           th:href="${product.purchaseLink}" 
+                           target="_blank" 
+                           class="btn-primary">Buy Now</a>
+                        
+                        <form th:action="@{'/purchase/' + ${product.id}}" method="post" style="display: inline;">
+                            <button type="submit" class="btn-secondary">Track This Purchase</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-analysis">
+                <h2>🤖 AI-Powered Analysis by ChatGPT</h2>
+                
+                <div class="analysis-section">
+                    <h3>✅ Advantages of Eco-Friendly Alternative</h3>
+                    <div class="analysis-content" th:utext="${product.aiGeneratedPros}">
+                        Loading AI analysis...
+                    </div>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3>❌ Disadvantages of Normal Product</h3>
+                    <div class="analysis-content" th:utext="${product.aiGeneratedCons}">
+                        Loading AI analysis...
+                    </div>
+                </div>
+                
+                <div class="analysis-section suggestion">
+                    <h3>💡 Our Suggestion</h3>
+                    <div class="analysis-content" th:text="${product.aiGeneratedSuggestion}">
+                        Loading suggestion...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

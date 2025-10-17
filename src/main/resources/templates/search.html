@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Eco-Friendly Alternatives</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌍 Search Eco-Friendly Products</h1>
+            <nav>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/dashboard}">Dashboard</a>
+                <a th:href="@{/logout}">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <div class="container">
+            <form th:action="@{/search}" method="post" class="search-form">
+                <input type="text" name="keyword" 
+                       th:value="${keyword}" 
+                       placeholder="Search for a product (e.g., plastic bottle, disposable bags)..." 
+                       required>
+                <button type="submit" class="btn-primary">Search</button>
+            </form>
+
+            <div class="search-results" th:if="${alternatives != null}">
+                <h2>Search Results 
+                    <span th:if="${keyword}" th:text="'for \'' + ${keyword} + '\''"></span>
+                </h2>
+                
+                <div class="product-grid" th:if="${!alternatives.isEmpty()}">
+                    <div class="product-card" th:each="product : ${alternatives}">
+                        <img th:src="${product.imageUrl != null ? product.imageUrl : '/images/eco-placeholder.jpg'}" 
+                             th:alt="${product.ecoAlternative}">
+                        <div class="product-info">
+                            <h3 th:text="${product.ecoAlternative}">Eco Alternative</h3>
+                            <p class="normal-product">Instead of: <span th:text="${product.normalProduct}"></span></p>
+                            <p class="price" th:if="${product.ecoPrice != null}">
+                                Price: $<span th:text="${product.ecoPrice}"></span>
+                            </p>
+                            <div class="impact-info">
+                                <span class="badge">🌿 CO2: <span th:text="${product.co2SavedPerUnit} + 'kg'"></span></span>
+                                <span class="badge">♻️ Plastic: <span th:text="${product.plasticSavedPerUnit} + 'kg'"></span></span>
+                            </div>
+                        </div>
+                        <a th:href="@{'/product/' + ${product.id}}" class="btn-secondary">View Details & Analysis</a>
+                    </div>
+                </div>
+                
+                <p th:if="${alternatives.isEmpty()}" class="no-results">
+                    No eco-friendly alternatives found for "<span th:text="${keyword}"></span>". 
+                    Try a different search term or check back later!
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
