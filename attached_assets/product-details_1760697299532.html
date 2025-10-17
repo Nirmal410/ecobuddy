@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-detail {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .product-detail img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-detail h2 {
+            color: #2e7d32;
+        }
+
+        .product-detail p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Eco Product Details</h1>
+    </header>
+
+    <section class="product-detail">
+        <h2 th:text="${product.ecoAlternative}">Products Name</h2>
+
+        <!-- Local image reference -->
+        <img th:src="@{'/images/' + ${product.id} + '.jpg'}" alt="Product Image" />
+
+        <p><span class="label">Normal Product:</span> <span th:text="${product.normalProduct}">Normal Product</span></p>
+        <p><span class="label">Eco Alternative:</span> <span th:text="${product.ecoAlternative}">Eco Alternative</span></p>
+        <p><span class="label">Description:</span> <span th:text="${product.description}">Description here</span></p>
+        <p><span class="label">Environmental Impact:</span> <span th:text="${product.environmentalDamage}">Damage Info</span></p>
+    </section>
+</body>
+</html>

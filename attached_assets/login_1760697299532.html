@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eco Shop - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f9f4;
+      color: #2e4d2e;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(46, 77, 46, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #3e6b3e;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #cde0cd;
+      border-radius: 8px;
+      background-color: #f0f8f0;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4caf50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a045;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #4caf50;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Welcome Back to Eco Shop</h2>
+
+    <div th:if="${param.error}" class="error">Invalid username or password.</div>
+    <div th:if="${param.logout}" class="error" style="color:green;">You have been logged out successfully.</div>
+
+    <form th:action="@{/login}" method="post">
+      <label for="username">Email</label>
+      <input type="text" id="username" name="username" required/>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required/>
+
+      <input type="submit" value="Login" class="btn btn-primary"/>
+    </form>
+
+    <div class="footer">
+      Don't have an account? <a href="/register">Sign Up</a>
+    </div>
+  </div>
+
+</body>
+</html>

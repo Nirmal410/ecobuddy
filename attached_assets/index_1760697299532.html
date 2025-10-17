@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"> <!-- Changed to UTF-8 for broader compatibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Shopping Assistant</title>
+    <!-- Corrected CSS path to use Thymeleaf syntax -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- Corrected favicon path to use Thymeleaf syntax -->
+    <link rel="icon" th:href="@{/images/leaf-icon.png}" type="image/png"> 
+</head>
+<body>
+
+    <header>
+        <h1>Eco-Friendly Shopping Assistant 🌍</h1>
+        <p>Shop Smart, Live Green</p>
+        <div>
+            <!-- Corrected Thymeleaf links for Register and Login -->
+            <h3><a th:href="@{/register}">Register</a></h3>
+            <h3><a th:href="@{/login}">Login</a></h3>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="overlay">
+            <div class="hero-content">
+                <h2>Embrace Sustainability, One Product at a Time</h2>
+                <p>Discover eco-friendly alternatives and make a difference.</p>
+                <a th:href="@{/search}" class="button">Explore Sustainable Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <!-- Corrected image path to use Thymeleaf syntax -->
+            <img th:src="@{/images/leaf-icon.png}" alt="Eco-friendly">
+            <h3>Eco-Friendly Products</h3>
+            <p>Find biodegradable, plastic-free, and ethically sourced alternatives.</p>
+        </div>
+        <div class="feature">
+            <!-- Corrected image path to use Thymeleaf syntax -->
+            <img th:src="@{/images/background.jpg}" alt="Sustainable">
+            <h3>Sustainable Brands</h3>
+            <p>Support companies using renewable energy and eco-conscious packaging.</p>
+        </div>
+        <div class="feature">
+            <!-- Corrected image path to use Thymeleaf syntax -->
+            <img th:src="@{/images/leaf-icon.png}" alt="Green Living">
+            <h3>Green Living Tips</h3>
+            <p>Learn how small lifestyle changes can reduce your carbon footprint.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Eco-Friendly Shopping Assistant | Making the world greener, one step at a time</p>
+    </footer>
+
+</body>
+</html>
