@@ -70,7 +70,7 @@
         </div>
     </section>
 
-    <script>
+    <script th:inline="javascript">
         const ctx = document.getElementById('impactChart').getContext('2d');
         const impactChart = new Chart(ctx, {
             type: 'bar',
@@ -79,8 +79,8 @@
                 datasets: [{
                     label: 'Environmental Impact',
                     data: [
-                        [[${stats.totalCo2Saved}]],
-                        [[${stats.totalPlasticSaved}]]
+                        /*[[${stats.totalCo2Saved}?:0]]*/,
+                        /*[[${stats.totalPlasticSaved}?:0]]*/
                     ],
                     backgroundColor: [
                         'rgba(76, 175, 80, 0.6)',
